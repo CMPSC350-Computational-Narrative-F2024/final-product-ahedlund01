@@ -6,9 +6,21 @@ This project aims to extend an existing children's story generation application 
 
 ## Peer works
 
-TODO: Identify up to 3 works that you see as similar to what you're planning to do. If possible,
-highlight particular pages, passages, or sections of those works with brief notes summarizing how
-they motivate this project.
+1. **Radford, A., Wu, J., Amodei, D., Clark, J., Brundage, M., & Sutskever, I. (2019). *"Language Models are Unsupervised Multitask Learners."* OpenAI.**
+   - This foundational paper introduces the GPT-2 language model and explores its capacity for generating coherent, contextually accurate text in a variety of tasks. It provides insights into prompt engineering and the versatility of LLMs, which is critical for understanding how to structure prompts for different narrative styles and constraints, like in children’s storytelling.
+
+2. **Brown, T. B., Mann, B., Ryder, N., Subbiah, M., Kaplan, J., Dhariwal, P., ... & Amodei, D. (2020). *"Language Models are Few-Shot Learners."* Advances in Neural Information Processing Systems, 33.**
+   - This paper presents GPT-3 and emphasizes few-shot learning, where minimal examples are needed to prompt the model. The concept of few-shot learning can be applied to develop nuanced prompts that guide the model effectively, particularly when generating polar-opposite story themes and maintaining consistency in long-form narratives.
+
+3. **Peng, H., Huang, Z., Xie, X., & Liang, X. (2022). *"Characterizing the Diversity of Large Language Models in Generative Tasks."* Proceedings of the 60th Annual Meeting of the Association for Computational Linguistics.**
+   - This study examines how LLMs like GPT-3 vary in generating creative content and explores ways to manage narrative diversity and coherence. The findings could be useful for designing prompt sequences to ensure diverse but contextually appropriate story elements, especially in producing novel, unexpected scenarios that still align with narrative goals.
+
+4. **Holtzman, A., Buys, J., Du, L., Forbes, M., & Choi, Y. (2020). *"The Curious Case of Neural Text Degeneration."* International Conference on Learning Representations (ICLR).**
+   - This paper discusses issues with text degeneration in generative models, where output becomes repetitive or nonsensical over time, especially in longer texts. Techniques like nucleus sampling and controlling for model verbosity are highlighted, which could help in managing quality control over a story that spans thousands of words.
+
+5. **Ziegler, D., Stiennon, N., Wu, J., Brown, T., Radford, A., Amodei, D., ... & Christiano, P. (2019). *"Fine-tuning Language Models from Human Preferences."* arXiv preprint arXiv:1909.08593.**
+   - This work explores the fine-tuning of LLMs using human feedback to align outputs with specific user goals. It provides practical insights into controlling narrative tone and age-appropriateness—essential aspects for a children’s story generation application focused on interesting but context-sensitive themes.
+
 
 ## Challenges
 

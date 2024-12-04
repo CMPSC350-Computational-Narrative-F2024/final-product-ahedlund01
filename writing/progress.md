@@ -8,8 +8,6 @@ Polar Opposites Story Generator
 
 The diffculties we have encountered so far is related to the API and the amounts of tokens allocated be call, it is hard to alter the length of output generated additionally the run time is long. This makes it annoying to observe changes made in the code. It has been enjoyable using the random creativity of the AI generating themes beacuse it comes up with scnearios that we would not think of. The concpet has not changed fundamentally however we have had to make changes to the logic to make sure that the output is of required length.
 
-TODO: Provide a 3-5 sentence description of your progress to this point. What has been
-difficult? What has been enjoyable? Has your concept changed or shifted in any meaningful way?
 
 ## Peer Feedback
 

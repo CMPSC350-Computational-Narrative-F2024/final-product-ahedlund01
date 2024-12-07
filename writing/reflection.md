@@ -2,7 +2,7 @@
 
 ## Final title
 
-TODO: Provide the final title
+Interactive Polar Opposite Story Generator
 
 ## Summary
 

@@ -10,10 +10,7 @@ The project is an AI-powered story generator that creates unique narratives by c
 
 ## Reference works
 
-TODO: Incorporate the three (3) reference works which can include the body of work we've read this 
-semester with a meaningful discussion of how they relate to your final work. Here, use
-passages from both _your_ work _and_ the selected work to make this comparison (or 
-contrast!) clear.
+The project's approach to generating coherent long-form narratives directly relates to Holtzman et al.'s "The Curious Case of Neural Text Degeneration," particularly in addressing the challenge of maintaining narrative consistency over thousands of words. This is reflected in our chunked generation approach, where the story is broken into manageable segments with contextual threading, preventing the text degeneration issues Holtzman describes. The project's "polar opposites" theme implementation draws from Brown et al.'s work on few-shot learning in "Language Models are Few-Shot Learners," particularly in how we structure prompts to maintain thematic consistency while generating creative cultural combinations. Additionally, Peng et al.'s research on LLM diversity in generative tasks informed our implementation of scenario enhancement, where users can choose between multiple AI-generated variations of their ideas, demonstrating the balance between creative diversity and narrative coherence.
 
 ## Describe your single largest success.
 
@@ -25,9 +22,7 @@ The biggest challenge was optimizing the performance and managing asynchronous o
 
 ## The role of feedback
 
-TODO: Describe how the feedback from peers shaped your work. This can incorporate feedback
-from earlier assignments or solely from this one. Cite at least two (2) examples, though
-more are always more helpful.
+Peer feedback significantly shaped the project's development in two crucial ways. First, Audrey's feedback about the program's ability to maintain consistent syntax throughout the document validated our chunked generation approach while suggesting the exploration of different LLMs for potentially better results. This led to improvements in our prompt engineering to better handle token and word limit requirements. Second, the peer questions about theme selection and narrative coherence prompted us to implement the user scenario enhancement feature, allowing users to either use their scenarios as-is or receive AI-enhanced versions, thereby addressing concerns about both theme selection and narrative consistency. Additionally, feedback about the generation time and API token limitations led to the implementation of concurrent processing and better resource management in our code.
 
 ## Contextualizing
 

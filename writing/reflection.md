@@ -6,7 +6,7 @@ TODO: Provide the final title
 
 ## Summary
 
-TODO: In no more than two (2) sentences, write a summary of what your work is "about."
+The project is an AI-powered story generator that creates unique narratives by combining contrasting cultural elements, complete with AI-generated illustrations. This generator emphasizes the intersection of human creativity and machine assistance by allowing users to either select from predefined scenarios, generate new ones, or create and enhance their own scenarios through AI collaboration.
 
 ## Reference works
 

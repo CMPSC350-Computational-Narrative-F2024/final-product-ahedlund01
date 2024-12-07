@@ -5,13 +5,15 @@ import openai
 from openai import OpenAI
 
 from story_generator import StoryGenerator
-from config import SCENARIOS
+from config import MIN_WORDS, SCENARIOS
 from utils import select_scenario_with_menu
 
 # Configuration
 CONFIG = dotenv_values(".env")
 OPEN_AI_KEY = CONFIG.get("KEY") or os.environ.get("OPEN_AI_KEY")
 OPEN_AI_ORG = CONFIG.get("ORG") or os.environ.get("OPEN_AI_ORG")
+
+# Initialize OpenAI client
 client = OpenAI(api_key=OPEN_AI_KEY)
 client.organization = OPEN_AI_ORG
 
@@ -30,7 +32,7 @@ async def main():
     
     try:
         # Select scenario
-        scenario = select_scenario_with_menu(temp_assistant)
+        scenario = await select_scenario_with_menu(client, temp_assistant)
         print(f"\nPreparing to generate story for: {scenario['setting']}")
         
         # Initialize story generator
@@ -40,47 +42,99 @@ async def main():
         # Create story and illustrator assistants
         generator.story_assistant = await generator.create_assistant(
             "Story Generator",
-            f"Generate an engaging story about {scenario['setting']}. "
-            f"Theme: {scenario['description']}"
+            f"""Generate an engaging {MIN_WORDS} word story about {scenario['setting']}.
+            Theme: {scenario['description']}
+            
+            Requirements:
+            - Rich character development
+            - Detailed world-building
+            - Cultural interactions and details
+            - Natural dialogue
+            - Engaging plot progression"""
         )
         
         generator.illustrator_assistant = await generator.create_assistant(
             "Illustrator",
-            f"Create detailed image prompts for {scenario['setting']} story."
+            f"""Create detailed image prompts for {scenario['setting']} story.
+            
+            Requirements:
+            - Focus on key visual elements
+            - Blend contrasting cultural elements
+            - No text in images
+            - Maintain consistent character appearances
+            - Appropriate for general audiences"""
         )
         
         # Generate story
         print("\nGenerating story...")
-        story = await generator.generate_story(generator.story_assistant.id)
+        try:
+            story = await generator.generate_story(generator.story_assistant.id)
+            print("\nStory generation complete!")
+        except Exception as e:
+            print(f"Error generating story: {e}")
+            return
         
         # Split into chapters
         print("\nSplitting into chapters...")
-        chapters = generator.split_into_chapters(story)
+        try:
+            chapters = generator.split_into_chapters(story)
+            print(f"Created {len(chapters)} chapters")
+        except Exception as e:
+            print(f"Error splitting chapters: {e}")
+            return
         
         # Generate images
         print("\nGenerating images...")
-        images = await generator.generate_all_images(chapters)
+        try:
+            images = await generator.generate_all_images(chapters)
+            print(f"Generated {len(images)} images")
+        except Exception as e:
+            print(f"Error generating images: {e}")
+            return
         
         # Create PDF
         print("\nCreating PDF...")
-        references = [
-            f"1. Historical documentation about {scenario['setting']}",
-            "2. Cultural studies and research",
-            "3. Similar creative works"
-        ]
-        
-        pdf_filename = generator.create_pdf(chapters, images, scenario, references)
-        print(f"\nStory generated successfully! File saved as: {pdf_filename}")
+        try:
+            references = [
+                f"1. Historical documentation about {scenario['setting']}",
+                "2. Cultural studies and research",
+                "3. Similar creative works"
+            ]
+            
+            pdf_filename = generator.create_pdf(chapters, images, scenario, references)
+            print(f"\n✨ Story generated successfully! ✨")
+            print(f"📚 File saved as: {pdf_filename}")
+            
+        except Exception as e:
+            print(f"Error creating PDF: {e}")
+            return
         
     except Exception as e:
         print(f"\nAn error occurred: {e}")
     
     finally:
-        # Cleanup
+        print("\nCleaning up resources...")
+        # Cleanup assistants
         if 'temp_assistant' in locals():
-            client.beta.assistants.delete(temp_assistant.id)
+            try:
+                client.beta.assistants.delete(temp_assistant.id)
+            except Exception as e:
+                print(f"Error cleaning up temporary assistant: {e}")
+        
         if 'generator' in locals():
-            await generator.cleanup()
+            try:
+                await generator.cleanup()
+            except Exception as e:
+                print(f"Error cleaning up generator: {e}")
+        
+        print("Clean up complete.")
 
 if __name__ == "__main__":
-    asyncio.run(main())
+    try:
+        asyncio.run(main())
+    except KeyboardInterrupt:
+        print("\n\nProgram interrupted by user. Cleaning up...")
+    except Exception as e:
+        print(f"\nUnexpected error: {e}")
+    finally:
+        print("\nProgram ended.")
